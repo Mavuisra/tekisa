@@ -1,0 +1,35 @@
+{% extends "web/base.html" %}
+
+{% block content %}
+<section class="card">
+  <h3 class="section-title">Réseau fournisseurs</h3>
+  <p class="muted">Marketplace, recherche GPS, conversations, commandes et profil fournisseur en version web.</p>
+</section>
+<section style="display:grid;grid-template-columns:repeat(2,minmax(180px,1fr));gap:10px;margin-top:10px;">
+  <div class="card"><div class="muted">Fournisseurs disponibles</div><div style="font-size:22px;font-weight:800;">{{ suppliers_active }}</div></div>
+  <div class="card"><div class="muted">Produits marketplace</div><div style="font-size:22px;font-weight:800;">{{ marketplace_products }}</div></div>
+  <div class="card"><div class="muted">Conversations actives</div><div style="font-size:22px;font-weight:800;">{{ active_conversations }}</div></div>
+  <div class="card"><div class="muted">Commandes en cours</div><div style="font-size:22px;font-weight:800;">{{ orders_in_progress }}</div></div>
+</section>
+<section class="card" style="margin-top:10px;">
+  <h3 class="section-title">Fonctionnalités Fournisseur</h3>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(180px,1fr));gap:10px;">
+    <div class="card" style="background:#eaf6ff;">
+      <div style="font-weight:700;">Marketplace</div>
+      <div class="muted">Catalogue produits disponibles et recherche.</div>
+    </div>
+    <div class="card" style="background:#eff8f5;">
+      <div style="font-weight:700;">Conversations</div>
+      <div class="muted">Messagerie fournisseur avec historique.</div>
+    </div>
+    <div class="card" style="background:#f2ecff;">
+      <div style="font-weight:700;">Commandes</div>
+      <div class="muted">Suivi des commandes en attente et validées.</div>
+    </div>
+    <div class="card" style="background:#fff4e8;">
+      <div style="font-weight:700;">Localisation GPS</div>
+      <div class="muted">Recherche fournisseur par proximité et distance.</div>
+    </div>
+  </div>
+</section>
+{% endblock %}

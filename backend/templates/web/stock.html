@@ -1,0 +1,14 @@
+{% extends "web/base.html" %}
+
+{% block content %}
+<section class="card">
+  <h3 class="section-title">Gestion du stock</h3>
+  <p class="muted">Vue web alignée au style Flutter pour stock, alertes et réappro.</p>
+</section>
+<section style="display:grid;grid-template-columns:repeat(2,minmax(180px,1fr));gap:10px;margin-top:10px;">
+  <div class="card"><div class="muted">Produits total</div><div style="font-size:22px;font-weight:800;">{{ products_total }}</div></div>
+  <div class="card"><div class="muted">Stock critique</div><div style="font-size:22px;font-weight:800;">{{ critical_stock }}</div></div>
+  <div class="card"><div class="muted">Rupture</div><div style="font-size:22px;font-weight:800;">{{ out_of_stock }}</div></div>
+  <div class="card"><div class="muted">Réappro à lancer</div><div style="font-size:22px;font-weight:800;">{{ to_reorder }}</div></div>
+</section>
+{% endblock %}

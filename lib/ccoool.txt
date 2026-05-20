@@ -1,0 +1,173 @@
+Tu es un ingénieur logiciel senior.
+Tu ne construis pas simplement une application.
+Tu construis une transformation digitale du système éducatif congolais.
+
+Imagine Kinshasa.
+
+Des milliers de parents travaillent toute la journée.
+Ils ne savent pas si leurs enfants sont présents à l’école.
+Ils découvrent les mauvaises notes trop tard.
+Les écoles gèrent encore beaucoup de choses sur papier.
+Les paiements créent des confusions.
+L’internet est instable.
+Les téléphones sont souvent Android bas de gamme.
+
+Ta mission est de résoudre cela.
+
+Tu dois concevoir une plateforme SaaS multi-écoles qui connecte :
+
+Les parents
+
+Les élèves
+
+Les enseignants
+
+L’administration scolaire
+
+Un super administrateur national
+
+Le backend doit être construit avec Django et Django REST Framework.
+La base de données doit être PostgreSQL.
+Le système doit être structuré, sécurisé, scalable et optimisé pour faible bande passante.
+
+Chaque école doit être isolée via un système multi-tenant basé sur un school_id.
+Aucune école ne doit voir les données d’une autre.
+
+L’authentification doit utiliser JWT avec Access et Refresh tokens.
+Les parents doivent pouvoir se connecter via OTP SMS.
+
+Le système doit gérer :
+
+Les écoles
+
+Les classes
+
+Les matières
+
+Les enseignants
+
+Les élèves
+
+Les notes avec calcul automatique des moyennes
+
+Les présences journalières
+
+Les retards
+
+Les bulletins PDF
+
+Les paiements Mobile Money (simulation M-Pesa / Airtel Money)
+
+Les notifications SMS
+
+Les notifications push
+
+La messagerie interne parent ↔ école
+
+Le backend doit inclure :
+
+Permissions basées sur rôles
+
+Cache Redis
+
+Celery pour tâches asynchrones
+
+Logging avancé
+
+Pagination obligatoire
+
+Optimisation des requêtes
+
+Compression des réponses API
+
+Il doit être capable de supporter à long terme plus de 500 000 utilisateurs.
+
+Ensuite, tu dois construire l’application mobile avec Flutter.
+
+L’application doit être :
+
+Légère
+
+Rapide
+
+Simple
+
+Compatible Android bas de gamme
+
+Optimisée pour internet instable
+
+Elle doit suivre une Clean Architecture.
+Utiliser Riverpod ou Bloc pour le state management.
+Utiliser Dio pour les appels API.
+Utiliser Secure Storage pour stocker les tokens.
+Utiliser SQLite ou Hive pour le cache offline.
+
+Elle doit fonctionner en mode offline-first.
+Les données doivent se synchroniser automatiquement dès que la connexion revient.
+
+L’application parent doit permettre :
+
+Voir le résumé scolaire de l’enfant
+
+Voir les notes avec graphique d’évolution
+
+Voir les absences
+
+Recevoir alertes instantanées
+
+Payer les frais scolaires via Mobile Money
+
+Envoyer un message à l’enseignant
+
+Le système doit inclure un module analytique intelligent :
+
+Détecter les baisses de performance
+
+Identifier les élèves à risque
+
+Générer un rapport automatique pour le directeur
+
+Le déploiement doit se faire sur VPS Linux avec :
+
+Docker
+
+Gunicorn
+
+Nginx
+
+CI/CD
+
+Backup automatique base de données
+
+Tu dois livrer :
+
+Architecture détaillée
+
+Diagramme base de données
+
+Structure complète Django
+
+Structure complète Flutter
+
+Documentation API
+
+Plan MVP 90 jours
+
+Stratégie scaling national RDC
+
+Tu ne construis pas un simple projet étudiant.
+Tu construis une startup EdTech africaine capable de moderniser l’éducation congolaise.
+
+Optimise tout pour :
+
+Sécurité
+
+Performance
+
+Simplicité
+
+Coût serveur réduit
+
+Réalité terrain RDC
+
+Construis cela comme si le succès de l’éducation numérique congolaise dépendait de ton architecture.

@@ -1,0 +1,369 @@
+{% extends "web/base.html" %}
+
+{% block content %}
+<style>
+  .sales-shell {
+    display: grid;
+    gap: 12px;
+  }
+  .sales-kpis {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .sales-kpi {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+  }
+  .sales-icon-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sales-icon-title .material-symbols-rounded {
+    font-size: 20px;
+    color: #1d4ed8;
+    background: #e8f2ff;
+    border-radius: 10px;
+    padding: 6px;
+  }
+  .soft-panel {
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+  }
+  .input-soft {
+    width: 100%;
+    height: 42px;
+    border-radius: 12px;
+    border: 1px solid #dbe7f5;
+    padding: 0 12px;
+    background: #fff;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+    max-height: 290px;
+    overflow: auto;
+  }
+  .product-btn {
+    text-align: left;
+    border: 1px solid #dbe7f5;
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    transition: all .15s ease;
+  }
+  .product-btn:hover {
+    border-color: #93c5fd;
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.12);
+    transform: translateY(-1px);
+  }
+  .cart-total {
+    width: 100%;
+    padding: 10px 12px;
+    background: #e8f2ff;
+    border-radius: 12px;
+    border: 1px solid #bfdbfe;
+  }
+  .sale-submit {
+    margin-top: 12px;
+    height: 44px;
+    border: none;
+    background: #035d8a;
+    color: #fff;
+    border-radius: 12px;
+    font-weight: 700;
+    padding: 0 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sales-table-wrap {
+    margin-top: 10px;
+    overflow: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #fff;
+  }
+  .sales-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .sales-table thead tr {
+    text-align: left;
+    background: #f1f5f9;
+  }
+  .sales-table th, .sales-table td {
+    padding: 10px 8px;
+  }
+  .sales-table tbody tr {
+    border-top: 1px solid #e2e8f0;
+  }
+  .cart-line {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 10px;
+    border: 1px solid #dbe7f5;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  }
+  .cart-line-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .qty-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .qty-badge {
+    min-width: 26px;
+    text-align: center;
+    font-weight: 700;
+    color: #334155;
+  }
+  @media (max-width: 760px) {
+    .sales-kpis,
+    .products-grid,
+    .sales-meta-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="sales-shell">
+{% if flash_error %}
+  <section class="card" style="background:#fee2e2;border-color:#fecaca;color:#991b1b;box-shadow:0 6px 16px rgba(153,27,27,.08);">{{ flash_error }}</section>
+{% endif %}
+{% if flash_success %}
+  <section class="card" style="background:#dcfce7;border-color:#bbf7d0;color:#166534;box-shadow:0 6px 16px rgba(22,101,52,.08);">{{ flash_success }}</section>
+{% endif %}
+<section class="sales-kpis">
+  <div class="card sales-kpi">
+    <div class="sales-icon-title">
+      <span class="material-symbols-rounded">shopping_bag</span>
+      <div class="muted">Ventes du jour</div>
+    </div>
+    <div style="font-size:22px;font-weight:800;margin-top:8px;">{{ sales_today }}</div>
+  </div>
+  <div class="card sales-kpi">
+    <div class="sales-icon-title">
+      <span class="material-symbols-rounded">payments</span>
+      <div class="muted">Ticket moyen</div>
+    </div>
+    <div style="font-size:22px;font-weight:800;margin-top:8px;">{{ avg_ticket }} CDF</div>
+  </div>
+</section>
+
+<section class="card soft-panel">
+  <h3 class="section-title sales-icon-title">
+    <span class="material-symbols-rounded">point_of_sale</span>
+    <span>Vendre / Encaisser</span>
+  </h3>
+  <div style="margin-top:10px;">
+    <input id="productSearch" type="text" placeholder="Rechercher un produit (nom, SKU)" class="input-soft" />
+  </div>
+  <div id="productsWrap" class="products-grid">
+    {% for p in products %}
+      <button
+        type="button"
+        class="product-btn"
+        data-name="{{ p.name|lower }}"
+        data-label="{{ p.name }}"
+        data-sku="{{ p.sku|lower }}"
+        data-id="{{ p.id }}"
+        data-price="{{ p.unit_price }}"
+        data-stock="{{ p.stock_quantity }}"
+      >
+        <div style="font-weight:700;">{{ p.name }}</div>
+        <div class="muted">SKU: {{ p.sku }} • Stock: {{ p.stock_quantity }}</div>
+        <div style="margin-top:4px;color:#1d4ed8;font-weight:700;">{{ p.unit_price }} CDF</div>
+      </button>
+    {% empty %}
+      <div class="muted">Aucun produit disponible.</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="card soft-panel">
+  <h3 class="section-title sales-icon-title">
+    <span class="material-symbols-rounded">shopping_cart</span>
+    <span>Panier en cours</span>
+  </h3>
+  <form method="post" id="saleForm">
+    {% csrf_token %}
+    <input type="hidden" name="items_json" id="itemsJson" />
+    <div id="cartLines" class="muted">Aucun article ajouté.</div>
+    <div class="sales-meta-grid" style="display:grid;grid-template-columns:repeat(2,minmax(220px,1fr));gap:10px;margin-top:10px;">
+      <div>
+        <label class="muted">Client existant</label>
+        <select name="customer_id" class="input-soft" style="padding:0 10px;margin-top:4px;">
+          <option value="">Client libre</option>
+          {% for c in customers %}
+            <option value="{{ c.id }}">{{ c.full_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label class="muted">Ou nom client</label>
+        <input name="customer_name" type="text" placeholder="Nom client (optionnel)" class="input-soft" style="margin-top:4px;" />
+      </div>
+      <div>
+        <label class="muted">Paiement</label>
+        <select name="payment_method" class="input-soft" style="padding:0 10px;margin-top:4px;">
+          <option value="cash">Cash</option>
+          <option value="mobile_money">Mobile Money</option>
+          <option value="card">Carte</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:end;">
+        <div class="cart-total">
+          <div class="muted">Total</div>
+          <div id="cartTotal" style="font-size:20px;font-weight:800;color:#1d4ed8;">0 CDF</div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="sale-submit">
+      <span class="material-symbols-rounded" style="font-size:19px;">check_circle</span>
+      Valider et encaisser
+    </button>
+  </form>
+</section>
+
+<section class="card soft-panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+    <h3 class="section-title sales-icon-title" style="margin:0;">
+      <span class="material-symbols-rounded">receipt_long</span>
+      <span>Liste des ventes</span>
+    </h3>
+    <form method="get">
+      <input type="date" name="date" value="{{ selected_date }}" onchange="this.form.submit()" class="input-soft" style="height:38px;border-radius:10px;padding:0 10px;" />
+    </form>
+  </div>
+  <div class="sales-table-wrap">
+    <table class="sales-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Heure</th>
+          <th>Client</th>
+          <th>Paiement</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in day_sales %}
+          <tr>
+            <td>#{{ s.id }}</td>
+            <td>{{ s.created_at|date:"H:i" }}</td>
+            <td>{% if s.customer %}{{ s.customer.full_name }}{% else %}Client libre{% endif %}</td>
+            <td>{{ s.payment_method }}</td>
+            <td style="font-weight:700;">{{ s.total }} CDF</td>
+          </tr>
+        {% empty %}
+          <tr><td colspan="5" style="padding:10px;" class="muted">Aucune vente sur cette date.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+  const cart = [];
+  const linesEl = document.getElementById("cartLines");
+  const totalEl = document.getElementById("cartTotal");
+  const itemsJsonEl = document.getElementById("itemsJson");
+  const productSearch = document.getElementById("productSearch");
+  const productButtons = Array.from(document.querySelectorAll(".product-btn"));
+
+  function renderCart() {
+    if (!cart.length) {
+      linesEl.innerHTML = '<div class="muted">Aucun article ajouté.</div>';
+      totalEl.textContent = "0 CDF";
+      itemsJsonEl.value = "[]";
+      return;
+    }
+    let total = 0;
+    linesEl.innerHTML = "";
+    cart.forEach((item, idx) => {
+      total += item.price * item.quantity;
+      const row = document.createElement("div");
+      row.className = "cart-line";
+      row.innerHTML = `
+        <div>
+          <strong>${item.name}</strong>
+          <div class="muted">${item.price} CDF</div>
+        </div>
+        <div class="cart-line-right">
+          <button type="button" class="qty-btn" data-idx="${idx}" data-act="minus">-</button>
+          <div class="qty-badge">${item.quantity}</div>
+          <button type="button" class="qty-btn" data-idx="${idx}" data-act="plus">+</button>
+        </div>
+      `;
+      linesEl.appendChild(row);
+    });
+    totalEl.textContent = `${total.toFixed(0)} CDF`;
+    itemsJsonEl.value = JSON.stringify(cart.map(i => ({ product_id: i.product_id, quantity: i.quantity })));
+  }
+
+  productButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = parseInt(btn.dataset.id, 10);
+      const name = btn.dataset.label || btn.dataset.name;
+      const price = parseFloat(btn.dataset.price);
+      const stock = parseInt(btn.dataset.stock, 10);
+      const existing = cart.find((x) => x.product_id === id);
+      if (existing) {
+        if (existing.quantity >= stock) return;
+        existing.quantity += 1;
+      } else {
+        if (stock <= 0) return;
+        cart.push({ product_id: id, name: name, price: price, quantity: 1, stock: stock });
+      }
+      renderCart();
+    });
+  });
+
+  linesEl.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const idx = parseInt(btn.dataset.idx, 10);
+    const act = btn.dataset.act;
+    const item = cart[idx];
+    if (!item) return;
+    if (act === "minus") {
+      item.quantity -= 1;
+      if (item.quantity <= 0) cart.splice(idx, 1);
+    }
+    if (act === "plus" && item.quantity < item.stock) {
+      item.quantity += 1;
+    }
+    renderCart();
+  });
+
+  productSearch.addEventListener("input", () => {
+    const q = productSearch.value.trim().toLowerCase();
+    productButtons.forEach((btn) => {
+      const name = btn.dataset.name || "";
+      const sku = btn.dataset.sku || "";
+      btn.style.display = !q || name.includes(q) || sku.includes(q) ? "" : "none";
+    });
+  });
+  renderCart();
+</script>
+</div>
+{% endblock %}

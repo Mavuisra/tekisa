@@ -1,0 +1,85 @@
+Tu es un développeur senior Flutter spécialisé en architecture scalable et temps réel.
+
+Je veux créer une application mobile éducative gamifiée pour enfants basée sur le programme scolaire de la RDC.
+
+L’application doit contenir :
+
+1) AUTHENTIFICATION
+- Inscription / Connexion
+- JWT
+- Rôle : Élève / Parent
+- Sauvegarde locale sécurisée
+
+2) TABLEAU DE BORD PRINCIPAL
+- Mode Concours (Temps Réel)
+- Mode Entraînement (IA Assistée)
+- Profil élève (niveau, progression, score)
+
+3) MODE CONCOURS (Temps Réel)
+- Deux joueurs connectés simultanément
+- WebSocket pour synchronisation
+- Affichage question mathématique identique
+- Chronomètre
+- Attribution automatique du point au premier qui répond correctement
+- Mise à jour score instantanée
+- Animation fluide
+
+4) MODE ENTRAÎNEMENT (IA Assistée)
+- Question générée dynamiquement via API
+- Après réponse :
+    - Correction intelligente
+    - Explication pas à pas
+    - Adaptation du niveau
+- Historique des performances
+- Système de progression par compétence :
+    - Addition
+    - Multiplication
+    - Division
+    - Fractions
+    - Problèmes
+
+5) ARCHITECTURE
+- Clean Architecture
+- Séparation :
+    - presentation/
+    - domain/
+    - data/
+- State management : Riverpod
+- Networking : Dio
+- WebSocket : socket_io_client
+- Stockage local : Hive
+- Modèles avec Freezed
+
+6) UX/UI
+- Interface colorée adaptée aux enfants
+- Animations fluides
+- Feedback visuel (Bravo, Correct, Réessaie)
+- Responsive Android & iOS
+
+7) STRUCTURE BACKEND ATTENDUE
+API REST :
+- POST /login
+- GET /question
+- POST /answer
+- GET /progress
+WebSocket :
+- join_room
+- new_question
+- answer_result
+- score_update
+
+8) OBJECTIF
+Génère :
+- Structure complète des dossiers
+- Code initial de l’application
+- Modèle d’écran principal
+- Exemple d’écran Mode Concours
+- Exemple d’écran Mode Entraînement
+- Service API
+- Service WebSocket
+- Exemple de gestion d’état Riverpod
+- Modèle de question mathématique
+- Gestion des erreurs
+- Architecture prête pour production
+
+Écris le code proprement, commenté, modulaire et évolutif.

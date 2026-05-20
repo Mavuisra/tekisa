@@ -1,0 +1,51 @@
+{% extends "web/auth_base.html" %}
+
+{% block auth_content %}
+<div style="padding:4px 2px 2px;">
+  <div style="color:#fff;font-size:26px;font-weight:800;line-height:1.2;text-align:center;">
+    Bienvenue sur TEKISA
+  </div>
+
+  <div style="margin-top:12px;color:rgba(255,255,255,.86);font-size:14px;line-height:1.55;text-align:center;">
+    TEKISA est une plateforme de gestion commerciale moderne qui aide les vendeurs,
+    caissiers, administrateurs et fournisseurs à travailler ensemble sur un même écosystème.
+  </div>
+
+  <div style="margin-top:10px;color:rgba(255,255,255,.78);font-size:14px;line-height:1.55;text-align:center;">
+    Suivez vos ventes en temps réel, gérez votre stock, développez votre réseau fournisseur
+    et pilotez vos performances avec une expérience simple, rapide et professionnelle.
+  </div>
+
+  <div
+    style="
+      margin-top:14px;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.10);
+      border-radius:12px;
+      padding:12px;
+      color:#fff;
+      font-size:13px;
+      line-height:1.5;
+    "
+  >
+    <div style="font-weight:700;margin-bottom:6px;">Ce que vous pouvez faire avec TEKISA</div>
+    <div>- Pilotage global de l’activité</div>
+    <div>- Vente rapide et encaissement sécurisé</div>
+    <div>- Suivi intelligent du stock</div>
+    <div>- Collaboration avec les fournisseurs</div>
+  </div>
+
+  <a
+    href="/web/register/"
+    style="margin-top:16px;height:50px;border-radius:12px;background:#fff;color:#035d8a;font-weight:700;text-decoration:none;display:flex;align-items:center;justify-content:center;"
+  >
+    Commencer
+  </a>
+  <a
+    href="/web/login/"
+    style="margin-top:8px;height:44px;border-radius:12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);color:#fff;font-weight:700;text-decoration:none;display:flex;align-items:center;justify-content:center;"
+  >
+    Connexion
+  </a>
+</div>
+{% endblock %}

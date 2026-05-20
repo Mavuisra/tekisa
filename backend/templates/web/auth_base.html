@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  {% load static %}
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,0,0"
+  />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TEKISA - {{ page_title|default:"Authentification" }}</title>
+  <style>
+    :root {
+      --primary: #035d8a;
+      --border: #e2e8f0;
+      --text: #111827;
+      --muted: #6b7280;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: #035d8a;
+      display: grid;
+      place-items: center;
+      color: var(--text);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .bg {
+      position: fixed;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      opacity: .35;
+    }
+    .bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(3, 93, 138, .25) 0%,
+        rgba(3, 93, 138, .72) 50%,
+        rgba(3, 93, 138, .94) 100%
+      );
+    }
+    .wrap {
+      width: min(100%, 440px);
+      border: 1px solid rgba(255, 255, 255, .24);
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 14px 36px rgba(2, 14, 28, .24);
+      position: relative;
+      z-index: 2;
+    }
+    .brand {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    .brand img {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+    }
+    .subtitle {
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .field { margin-bottom: 14px; }
+    .field label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .78);
+    }
+    .field input, .field select {
+      width: 100%;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .24);
+      padding: 0 12px;
+      font-size: 14px;
+      color: #fff;
+      background: rgba(255, 255, 255, .12);
+    }
+    .field input::placeholder { color: rgba(255, 255, 255, .54); }
+    .btn {
+      width: 100%;
+      height: 46px;
+      border: 0;
+      border-radius: 12px;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .links {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .links a {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+    }
+    .alert {
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .alert.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+    .alert.success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+    .auth-form {
+      display: grid;
+      gap: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div
+    class="bg"
+    style="background-image:url('{% if auth_bg_image %}{% static auth_bg_image %}{% else %}{% static 'images/loginimage.jpg' %}{% endif %}');"
+  ></div>
+  <section class="wrap">
+    <div class="brand">
+      <img src="{% static 'images/tekisa_logo.png' %}" alt="Tekisa" />
+    </div>
+    <div class="subtitle">{{ page_title }}</div>
+    {% if error_message %}<div class="alert error">{{ error_message }}</div>{% endif %}
+    {% if success_message %}<div class="alert success">{{ success_message }}</div>{% endif %}
+    {% block auth_content %}{% endblock %}
+    <div class="links">
+      <a href="/web/login/">Connexion</a>
+      <a href="/web/intro/">Créer un compte</a>
+      <a href="/web/intro/">Intro</a>
+    </div>
+  </section>
+</body>
+</html>

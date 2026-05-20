@@ -1,0 +1,302 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page_title }} | TEKISA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --tekisa-blue: #0b4fdc;
+      --tekisa-blue-dark: #073ea8;
+      --tekisa-blue-soft: #eaf1ff;
+      --ink: #0f172a;
+      --muted: #4b5563;
+      --line: #d6e3ff;
+      --radius: 5px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px 14px;
+    }
+    .wrap {
+      width: 95%;
+      max-width: 1600px;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 20px;
+    }
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(11, 79, 220, 0.08);
+    }
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      border-radius: var(--radius);
+      background: var(--tekisa-blue-soft);
+      color: var(--tekisa-blue-dark);
+      border: 1px solid #c8dbff;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 12px 0 8px;
+      line-height: 1.08;
+      font-size: clamp(30px, 4.4vw, 50px);
+      letter-spacing: -0.02em;
+      color: #0a1b44;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.63;
+      font-size: 15px;
+    }
+    .logo {
+      width: 148px;
+      max-width: 56%;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .downloads {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .btn {
+      text-decoration: none;
+      color: #0a1b44;
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      transition: .2s ease;
+      border: 1px solid #c9dafe;
+      background: #f7faff;
+    }
+    .btn:hover { transform: translateY(-1px); background: #eef4ff; }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--tekisa-blue), var(--tekisa-blue-dark));
+      color: #fff;
+      border: 1px solid transparent;
+    }
+    .story {
+      margin-top: 14px;
+      padding: 12px;
+      background: #f8fbff;
+      border: 1px solid #dce8ff;
+      border-radius: var(--radius);
+    }
+    .story h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      color: #0b2f88;
+    }
+    .story p { font-size: 14px; }
+    .kpi {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 8px;
+    }
+    .k {
+      background: #f1f6ff;
+      border: 1px solid #d4e3ff;
+      border-radius: var(--radius);
+      padding: 10px;
+    }
+    .k b { display: block; font-size: 17px; margin-bottom: 3px; color: #0b2f88; }
+    .k span { color: var(--muted); font-size: 12px; }
+    .phone {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(11, 79, 220, 0.08);
+    }
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--line);
+    }
+    .card .txt {
+      padding: 12px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .phone-frame {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      background: #0f172a;
+      border: 2px solid #0b1020;
+      border-radius: 5px;
+      padding: 8px 7px 10px;
+      box-shadow: 0 10px 25px rgba(2, 8, 23, 0.3);
+    }
+    .phone-notch {
+      width: 88px;
+      height: 6px;
+      margin: 0 auto 7px;
+      border-radius: 999px;
+      background: #1f2937;
+    }
+    .phone-screen {
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid #c7d2fe;
+      background: #fff;
+    }
+    .phone-screen img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+    .phone-caption {
+      padding: 8px 6px 0;
+      text-align: center;
+      color: #e5edff;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .01em;
+    }
+    .cta-box {
+      border: 1px solid #c5d9ff;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, #f2f7ff, #e7efff);
+      padding: 12px;
+    }
+    .cta-box b { color: #0b2f88; display: block; margin-bottom: 6px; }
+    .foot {
+      margin-top: 12px;
+      text-align: center;
+      color: #64748b;
+      font-size: 12px;
+    }
+    .phone-gallery {
+      display: grid;
+      gap: 18px;
+      padding: 4px 10px 16px;
+    }
+    @media (max-width: 1040px) {
+      .wrap { grid-template-columns: 1fr; max-width: 660px; }
+      .phone-gallery { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 1041px) {
+      .phone-gallery { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .phone-gallery .phone-frame:last-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 860px) {
+      .wrap { width: 95%; max-width: 760px; }
+      .card img { height: 190px; }
+    }
+    @media (max-width: 560px) {
+      .kpi { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="panel">
+      <img src="{% static 'images/tekisa_logo.png' %}" alt="Logo Tekisa" class="logo" />
+      <span class="badge">Mise à jour terminée</span>
+      <h1>Télécharge TEKISA maintenant</h1>
+      <p>
+        TEKISA est une plateforme de gestion commerciale pensée pour les boutiques et PME locales :
+        ventes rapides, suivi du stock, gestion des clients, réseau fournisseurs, et pilotage des performances.
+        L’objectif est simple : aider les commerçants à travailler avec plus de clarté, de vitesse et de fiabilité.
+      </p>
+
+      <div class="downloads">
+        <a class="btn primary" href="{{ play_store_url }}" target="_blank" rel="noopener">
+          <span>Google Play</span><span>Installer</span>
+        </a>
+        <a class="btn" href="{{ app_store_url }}" target="_blank" rel="noopener">
+          <span>App Store</span><span>Ouvrir</span>
+        </a>
+        <a class="btn" href="{{ apk_direct_url }}" {% if apk_direct_url != "#" %}download{% endif %}>
+          <span>Téléchargement APK direct</span><span>APK</span>
+        </a>
+      </div>
+
+      <div class="story">
+        <h3>Pourquoi TEKISA va plus loin</h3>
+        <p>
+          Avec TEKISA, tu centralises les opérations clés de ton activité dans une seule application.
+          Tu encaisses vite, tu évites les ruptures grâce aux alertes de stock, tu suis le comportement client
+          et tu échanges facilement avec les fournisseurs. Le module IA aide aussi à préparer des ventes en langage naturel.
+        </p>
+      </div>
+
+      <div class="kpi">
+        <div class="k"><b>Vendre</b><span>Encaissement rapide et brouillon IA</span></div>
+        <div class="k"><b>Stock</b><span>Suivi, alertes critiques, mouvements</span></div>
+        <div class="k"><b>Fournisseurs</b><span>Réseau, commandes et conversations</span></div>
+      </div>
+      <div class="foot">TEKISA © {% now "Y" %} • Tous droits réservés</div>
+    </section>
+
+    <aside class="phone">
+      <div class="card">
+        <div class="txt">
+          Aperçu de l’application dans un format smartphone, comme sur un vrai site de présentation produit.
+        </div>
+        <div class="phone-gallery">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img src="{% static 'images/LOGIN.jpeg' %}" alt="Écran connexion Tekisa" />
+            </div>
+            <div class="phone-caption">Connexion</div>
+          </div>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img src="{% static 'images/ECRANTINTRO.jpeg' %}" alt="Écran introduction Tekisa" />
+            </div>
+            <div class="phone-caption">Introduction</div>
+          </div>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img src="{% static 'images/VENTE.jpeg' %}" alt="Écran vente Tekisa" />
+            </div>
+            <div class="phone-caption">Vente rapide</div>
+          </div>
+        </div>
+      </div>
+      <div class="cta-box">
+        <b>Prêt à démarrer ?</b>
+        <div>Télécharge l’application et mets en place un pilotage plus intelligent de ton commerce dès aujourd’hui.</div>
+      </div>
+    </aside>
+  </main>
+</body>
+</html>

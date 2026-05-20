@@ -1,0 +1,14 @@
+{% extends "web/base.html" %}
+
+{% block content %}
+<section class="card">
+  <h3 class="section-title">Clients</h3>
+  <p class="muted">Écran client web avec le même langage visuel que l'application mobile.</p>
+</section>
+<section style="display:grid;grid-template-columns:repeat(2,minmax(180px,1fr));gap:10px;margin-top:10px;">
+  <div class="card"><div class="muted">Clients actifs</div><div style="font-size:22px;font-weight:800;">{{ customers_active }}</div></div>
+  <div class="card"><div class="muted">Clients inactifs</div><div style="font-size:22px;font-weight:800;">{{ customers_inactive }}</div></div>
+  <div class="card"><div class="muted">Nouveaux ce mois</div><div style="font-size:22px;font-weight:800;">{{ customers_new_month }}</div></div>
+  <div class="card"><div class="muted">Total clients</div><div style="font-size:22px;font-weight:800;">{{ customers_total }}</div></div>
+</section>
+{% endblock %}

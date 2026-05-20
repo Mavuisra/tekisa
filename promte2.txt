@@ -1,0 +1,211 @@
+Tu es un expert UX/UI Designer + Développeur Flutter senior spécialisé dans les applications éducatives gamifiées pour enfants.
+
+Je veux que tu ameliore cette  application mobile éducative basée sur le programme scolaire de la RDC avec :
+
+- Mode Entraînement (IA Assistée)
+- Mode Concours (Temps Réel)
+- Expérience ultra immersive
+- Animations fluides et motivantes
+- Adaptation intelligente du niveau
+
+Génère le scénario complet, les cas d’utilisation détaillés et décris précisément les animations Flutter à implémenter.
+
+L’application doit inclure :
+
+━━━━━━━━━━━━━━━━━━━━━━━
+1️⃣ ONBOARDING (Première utilisation)
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Scénario :
+- Animation logo (livre qui s’ouvre)
+- Fond coloré dynamique
+- Bouton "Commencer"
+
+Animations demandées :
+- FadeIn + Scale du logo
+- SlideUp du bouton
+- Son léger motivant
+
+Ensuite :
+- Sélection de classe (ex: 6e primaire)
+- Sélection avatar animé
+- Barre de progression animée
+
+Animations :
+- Avatar qui réagit (bounce léger)
+- Progress bar animée avec TweenAnimationBuilder
+- Transition page avec Hero animation
+
+━━━━━━━━━━━━━━━━━━━━━━━
+2️⃣ TABLEAU DE BORD PRINCIPAL
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Éléments :
+- Mode Concours (Bouton animé)
+- Mode Entraînement (Bouton animé)
+- Profil élève (niveau, score, badges)
+
+Animations :
+- Boutons avec effet ripple
+- Icônes avec animation Lottie légère
+- Apparition progressive des statistiques
+
+━━━━━━━━━━━━━━━━━━━━━━━
+3️⃣ MODE ENTRAÎNEMENT (IA ASSISTÉE)
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Scénario :
+Question affichée dynamiquement.
+Exemple : 36 ÷ 6 = ?
+
+Animations :
+- Question SlideIn depuis la droite
+- Chronomètre circulaire animé
+- Boutons numériques avec animation scale au tap
+
+Cas 1 : Bonne réponse
+
+Animations :
+- Bouton devient vert avec animation smooth color transition
+- Son positif court
+- Confettis animés
+- Badge étoile dorée apparaît (scale + fade)
+- Message IA : "Bravo !"
+
+Cas 2 : Mauvaise réponse
+
+Animations :
+- Shake animation du bloc réponse
+- Couleur rouge douce
+- Petit son discret
+- Apparition zone IA
+
+Intervention IA :
+- Animation pédagogique visuelle
+- Exemple :
+  36 se divise visuellement en groupes animés
+  Multiplication apparaît progressivement
+- Texte explicatif avec effet machine à écrire
+- Résultat final en vert avec glow effect
+
+━━━━━━━━━━━━━━━━━━━━━━━
+4️⃣ DÉTECTION FAIBLESSE AUTOMATIQUE
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Si 3 erreurs consécutives :
+
+Animations :
+- Message doux : "On va s’entraîner un peu plus"
+- Barre compétence descend légèrement
+- Nouvelle série de questions adaptées
+- Couleur écran devient plus calme (bleu léger)
+
+━━━━━━━━━━━━━━━━━━━━━━━
+5️⃣ MODE CONCOURS (TEMPS RÉEL)
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Scénario :
+- Match trouvé
+- Écran partagé en deux
+- Avatar gauche vs droite
+
+Animations :
+- Compte à rebours 3…2…1… avec zoom progressif
+- Son dynamique
+- Flash animation au démarrage
+
+Question synchronisée :
+
+Animations :
+- Flip animation du tableau
+- Effet lumière rapide
+
+Cas : Joueur gagne le point
+
+Animations :
+- Avatar gagnant saute (bounce)
+- +1 point animé
+- Scoreboard mise à jour animée
+- Écran perdant affiche "Trop tard" avec fade
+
+Transition :
+- Slide rapide vers nouvelle question
+
+━━━━━━━━━━━━━━━━━━━━━━━
+6️⃣ FIN DE MATCH
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Animations :
+- Confettis
+- Badge victoire
+- Résumé animé des statistiques
+- Graphique progression qui se remplit dynamiquement
+
+Message IA :
+- Analyse performance personnalisée
+- Encouragement adapté
+
+━━━━━━━━━━━━━━━━━━━━━━━
+7️⃣ INTELLIGENCE ADAPTATIVE
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Implémenter :
+
+- Analyse du temps de réponse
+- Analyse taux d’erreur
+- Ajustement automatique difficulté
+- Système de compétence (Addition, Division, Fractions…)
+
+Animations liées :
+- Barre compétence qui monte ou descend
+- Déblocage badge avec animation glow
+- Notification subtile d’amélioration
+
+━━━━━━━━━━━━━━━━━━━━━━━
+8️⃣ EXPÉRIENCE ÉMOTIONNELLE
+━━━━━━━━━━━━━━━━━━━━━━━
+
+L’application doit :
+- Ne jamais humilier
+- Encourager en cas d’échec
+- Récompenser progrès
+- Adapter ton pédagogique
+
+Animations doivent être :
+- Douces
+- Fluides (60fps)
+- Non agressives
+- Optimisées pour Android bas de gamme
+
+━━━━━━━━━━━━━━━━━━━━━━━
+9️⃣ EXIGENCES TECHNIQUES FLUTTER
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Utiliser :
+- AnimatedContainer
+- TweenAnimationBuilder
+- Hero
+- Lottie
+- AnimationController
+- Riverpod pour gestion d’état
+- socket_io_client pour temps réel
+- Dio pour API
+
+Optimiser :
+- Faible connexion internet
+- Reconnexion automatique WebSocket
+- Cache questions local
+- Performance mobile RDC
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+Génère :
+- Flow UX complet
+- Liste des écrans
+- Liste des animations par écran
+- Recommandations UX enfant
+- Structure Flutter recommandée
+- Composants réutilisables
+- Stratégie gamification avancée
+
+L’objectif est de créer une expérience immersive, éducative et compétitive adaptée aux enfants de la RDC.
