@@ -4,7 +4,7 @@ Application de gestion commerciale (ventes, stock, clients, fournisseurs) — **
 
 ## Prérequis
 
-- [Flutter](https://docs.flutter.dev/get-started/install) 3.24+
+- [Flutter](https://docs.flutter.dev/get-started/install) 3.41+ (Dart 3.11+, voir `environment.sdk` dans `pubspec.yaml`)
 - Python 3.12+
 - (Optionnel) Redis pour Celery
 
